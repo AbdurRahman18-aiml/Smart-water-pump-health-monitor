@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "author": "Smart Water Pump Health Monitor",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "mpu", "top": 160, "left": 260, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn",
+      "top": 190,
+      "left": -140,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "flowbtn",
+      "top": 280,
+      "left": -140,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -130,
+      "left": 250,
+      "attrs": { "pins": "i2c", "i2cAddress": "0x27", "background": "green", "color": "black" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": 30, "left": 480, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 65, "left": 530, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led2", "top": 110, "left": 480, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 145, "left": 530, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 280, "left": 450, "attrs": {} },
+    { "type": "chip-flow-simulator", "id": "chip1", "top": -181.38, "left": -196.8, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:21", "mpu:SDA", "green", [] ],
+    [ "esp:22", "mpu:SCL", "green", [] ],
+    [ "esp:3V3", "mpu:VCC", "red", [] ],
+    [ "esp:GND.1", "mpu:GND", "black", [] ],
+    [ "esp:21", "lcd1:SDA", "green", [] ],
+    [ "esp:22", "lcd1:SCL", "blue", [] ],
+    [ "esp:5V", "lcd1:VCC", "red", [] ],
+    [ "esp:GND.1", "lcd1:GND", "black", [] ],
+    [ "esp:14", "btn:1.l", "blue", [] ],
+    [ "btn:2.l", "esp:GND.2", "black", [] ],
+    [ "esp:33", "flowbtn:1.l", "green", [] ],
+    [ "flowbtn:2.l", "esp:GND.2", "black", [] ],
+    [ "esp:25", "led1:A", "green", [] ],
+    [ "led1:C", "r1:1", "green", [] ],
+    [ "r1:2", "esp:GND.1", "black", [] ],
+    [ "esp:26", "led2:A", "red", [] ],
+    [ "led2:C", "r2:1", "red", [] ],
+    [ "r2:2", "esp:GND.2", "black", [] ],
+    [ "esp:27", "bz1:1", "purple", [] ],
+    [ "bz1:2", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
